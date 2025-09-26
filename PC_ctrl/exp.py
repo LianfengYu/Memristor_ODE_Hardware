@@ -32,11 +32,11 @@ def main():
     
     t0 = -2
     t1 = 2
-    h0 = 0.1
+    h0 = 0
     x0 = np.array([math.exp(t0)])
       
-    integrator0 = rram_integrator(exponent, 'im_Heun', t0, x0, h0, bit = 0) 
-    integrator1 = integrator(exponent, 'im_Heun', t0, x0, h0) 
+    integrator0 = rram_integrator(exponent, 'GL3', t0, x0, h0, bit = 0) 
+    integrator1 = integrator(exponent, 'im_Heun', t0, x0, h0, rtol = 2e-3, atol = 2e-3) 
     
     fig = plt.figure(figsize=(15, 15))
     ax = fig.add_subplot(111)

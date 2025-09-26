@@ -5,7 +5,7 @@ from base.error import *
 
 class rram_integrator:
     
-    def __init__(self, func, method = 'Euler', x0 = 0, y0 = 0, h0 = 0.01, itr = 0, rtol = 1e-4, atol = 1e-4, bit = 0):
+    def __init__(self, func, method = 'Euler', x0 = 0, y0 = 0, h0 = 0.01, itr = 0, rtol = 1e-4, atol = 1e-4, bit = 0, test = False):
 
         '''
         
@@ -36,7 +36,12 @@ class rram_integrator:
         self.rtol = rtol
         self.atol = atol    
         self.bit = bit
-        self.T1R1 = T1R1(self.method, self.bit)   
+        self.test = test
+        if self.test:
+            self.handle, self.bitrate = Communication_Init()
+            self.T1R1 = T1R1(self.method, self.bit, self.test, self.handle, self.bitrate)   
+        else:
+            self.T1R1 = T1R1(self.method, self.bit, self.test)   
         self.order = self.T1R1.order
         self.itr = self.T1R1.order + itr + 1
         self.mode = self.T1R1.mode        
@@ -48,7 +53,6 @@ class rram_integrator:
         self.max_factor = self.T1R1.max_factor
         self.min_factor = self.T1R1.min_factor
         
-        
     def find_step(self, y, e, h):
         
         '''
@@ -58,7 +62,6 @@ class rram_integrator:
         '''
         
         err = calculate_mse(y, e)
-        #print(err, h)
         step_index = 0
         for i in range(self.stepcnt):
             if self.step_array[i] == h:

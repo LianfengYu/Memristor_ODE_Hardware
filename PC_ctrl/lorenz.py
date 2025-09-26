@@ -30,6 +30,7 @@ def lorenz(t, x):
 def plot3d_lorenz(ax, integrator, t1):
     y, e, step, trace = integrator.integrate(t1)    
     ax.plot(trace[0], trace[1], trace[2], label = "{}".format(integrator.method))
+    print(y)
     return  
 
 def main():
@@ -43,13 +44,13 @@ def main():
     
     t0 = 0   
     t1 = 20
-    h0 = 0.01
+    h0 = 0
     x0 = np.array([5., 10., 10.])  
     
     fig = plt.figure(figsize=(15, 15))
     ax = fig.add_subplot(111, projection="3d")
     
-    integrator0 = rram_integrator(lorenz, 'GL3', t0, x0, h0, bit = 0)   
+    integrator0 = rram_integrator(lorenz, 'GL3', t0, x0, h0, bit = 32)   
     plot3d_lorenz(ax, integrator0, t1)
     
     integrator1 = integrator(lorenz, 'GL3', t0, x0, h0)   

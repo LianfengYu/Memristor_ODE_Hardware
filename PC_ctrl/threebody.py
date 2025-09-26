@@ -64,6 +64,16 @@ def plot3d_separate(ax, bx, integrator, t1):
     bx.plot(trace[15], trace[16], trace[17], label = "Star C")  
     return    
 
+def plot3d_parallel(ax, bx, integrator, t1):
+    y = integrator.integrate(t1)    
+    ax.scatter(y[0], y[1], y[2], label = "Star A")
+    ax.scatter(y[6], y[7], y[8], label = "Star B")
+    ax.scatter(y[12], y[13], y[14], label = "Star C")
+    bx.scatter(y[3], y[4], y[5], label = "Star A")
+    bx.scatter(y[9], y[10], y[11], label = "Star B")
+    bx.scatter(y[15], y[16], y[17], label = "Star C")  
+    return  
+
 def main():
     
     plt.rcParams['font.size'] = 20
@@ -92,20 +102,19 @@ def main():
     
     t0 = 0
     t1 = 1
-    hc = 0
+    hc = 0.005
     hf = 0
     Jt = 5
     loopt = 3
    
     integrator0 = parallel_integrator(three_body, 'GL3', 'GL3', t0, x0, hc, hf, Jt, loop = loopt, rtol=1e-4, atol=1e-4, bit = 32, rram = True)
-
     integrator1 = integrator(three_body, 'GL3', t0, x0, hf) 
      
     fig = plt.figure(figsize=(25, 10))
     ax = fig.add_subplot(121, projection="3d")       
     bx = fig.add_subplot(122, projection="3d")       
     
-    #plot3d_separate(ax, ay, az, bx, by, bz, integrator0, t1)
+    plot3d_parallel(ax, bx, integrator0, t1)
     plot3d_separate(ax, bx, integrator1, t1)
 
     ax.set_xlabel("x-coordinate", labelpad = 20)

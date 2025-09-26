@@ -5,7 +5,7 @@ from model.model import model_map, read, stepcnt, stepfac, max_factor, min_facto
 
 class T1R1:
 
-    def __init__(self, method = 'ex_Heun', bit = 0):
+    def __init__(self, method = 'ex_Heun', bit = 0, test = False, handle = 1, bitrate = 100):
         
         '''
         
@@ -20,6 +20,7 @@ class T1R1:
         
         self.method = method
         self.bit = bit
+        self.test = test
         
         self.stepcnt = stepcnt
         self.stepfac = stepfac
@@ -27,17 +28,17 @@ class T1R1:
         self.min_factor = min_factor
         
         if method == 'ex_Heun':
-            self.len_k, self.order, self.rram, self.c, self.mode = ex_Heun(bit = self.bit)
+            self.len_k, self.order, self.rram, self.c, self.mode = ex_Heun(bit=self.bit)
         elif method == 'im_Heun':
-            self.len_k, self.order, self.rram, self.c, self.mode = im_Heun(bit = self.bit)
+            self.len_k, self.order, self.rram, self.c, self.mode = im_Heun(bit=self.bit)
         elif method == 'ode23':
-            self.len_k, self.order, self.rram, self.c, self.mode = ode23(bit = self.bit)
+            self.len_k, self.order, self.rram, self.c, self.mode = ode23(bit=self.bit)
         elif method == 'ode45':
-            self.len_k, self.order, self.rram, self.c, self.mode = ode45(bit = self.bit)
+            self.len_k, self.order, self.rram, self.c, self.mode = ode45(bit=self.bit)
         elif method == 'GL2':
-            self.len_k, self.order, self.rram, self.c, self.mode = GL2(bit = self.bit)
+            self.len_k, self.order, self.rram, self.c, self.mode = GL2(bit=self.bit)
         elif method == 'GL3':
-            self.len_k, self.order, self.rram, self.c, self.mode = GL3(bit = self.bit)
+            self.len_k, self.order, self.rram, self.c, self.mode = GL3(bit=self.bit)
         else:
             raise Exception("Error! Unexpected method! Only accept Heun, ode23, ode45, GL2, GL3!")
         
@@ -46,7 +47,7 @@ class T1R1:
         '''
         
         self.rram, self.scale = model_map(self.rram, self.bit)
-      
+        
       
     def mvm_y(self, in_y, h = 1):
         
@@ -63,10 +64,13 @@ class T1R1:
 
         for i in range(self.len_k + 2):
             for j in range(self.len_k):
-                out_y[:, i] += k0[:, j] * read(self.rram[j][i]) * h / self.scale
-            if i < self.len_k + 1:
+                out_y[:, i] += k0[:, j] * read(self.rram[j][i], self.bit) * h / self.scale
+            if self.bit != 0:
+                if i < self.len_k + 1:
+                    out_y[:, i] += y0[:]
+            else:
                 out_y[:, i] += y0[:]
-
+                
         return out_y
     
     def mvm_x(self, in_x):        

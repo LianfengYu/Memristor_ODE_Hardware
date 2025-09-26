@@ -36,8 +36,8 @@ def ex_Euler(rram = True, bit = 0):
     B = np.array([1.])
     B_ = np.array([1.])
     C = np.array([0.])
-    A, B, B_, C = quant(A, B, B_, C, bit)
     if not rram:
+        A, B, B_, C = quant(A, B, B_, C, bit)
         return k, order, A, B, B_, C, mode
     else:
         rram = abc_to_rram(k,A,B,B_,C,bit)
@@ -52,8 +52,8 @@ def im_Euler(rram = True, bit = 0):
     B = np.array([1.])
     B_ = np.array([1.])
     C = np.array([1.])
-    A, B, B_, C = quant(A, B, B_, C, bit)
     if not rram:
+        A, B, B_, C = quant(A, B, B_, C, bit)
         return k, order, A, B, B_, C, mode
     else:
         rram = abc_to_rram(k,A,B,B_,C,bit)
@@ -68,8 +68,8 @@ def ex_Heun(rram = True, bit = 0):
     B = np.array([0.5,0.5])
     B_ = np.array([1.,0.])
     C = np.array([0.,1.])
-    A, B, B_, C = quant(A, B, B_, C, bit)
     if not rram:
+        A, B, B_, C = quant(A, B, B_, C, bit)
         return k, order, A, B, B_, C, mode
     else:
         rram = abc_to_rram(k,A,B,B_,C,bit)
@@ -84,8 +84,8 @@ def im_Heun(rram = True, bit = 0): # Lobatto IIIA
     B = np.array([0.5,0.5])
     B_ = np.array([1.,0.])
     C = np.array([0.,1.])
-    A, B, B_, C = quant(A, B, B_, C, bit)
     if not rram:
+        A, B, B_, C = quant(A, B, B_, C, bit)
         return k, order, A, B, B_, C, mode
     else:
         rram= abc_to_rram(k,A,B,B_,C,bit)
@@ -106,8 +106,8 @@ def ode23(rram = True, bit = 0):
     B = np.array([2./9.,1./3.,4./9.,0.])
     B_ = np.array([7./24.,1./4.,1./3.,1./8.])
     C = np.array([0.,1./2.,3./4.,1.])
-    A, B, B_, C = quant(A, B, B_, C, bit)
     if not rram:
+        A, B, B_, C = quant(A, B, B_, C, bit)
         return k, order, A, B, B_, C, mode
     else:
         rram = abc_to_rram(k,A,B,B_,C,bit)
@@ -144,8 +144,8 @@ def ode45(rram = True, bit = 0):
     B = np.array([35./384.,0.,500./1113.,125./192.,-2187./6784.,11./84.,0.])
     B_ = np.array([5179./57600.,0.,7571./16695.,393./640.,-92097./339200.,187./2100.,1./40.])
     C = np.array([0.,1./5.,3./10.,4./5.,8./9.,1.,1.])
-    A, B, B_, C = quant(A, B, B_, C, bit)
     if not rram:
+        A, B, B_, C = quant(A, B, B_, C, bit)
         return k, order, A, B, B_, C, mode
     else:
         rram = abc_to_rram(k,A,B,B_,C,bit)
@@ -161,8 +161,8 @@ def GL2(rram = True, bit = 0):
     B = np.array([1/2,1/2])
     B_ = np.array([1./2.+1./2.*(3.**0.5), 1./2.-1./2.*(3.**0.5)])
     C = np.array([1./2.-1./6.*(3.**0.5), 1./2.+1./6.*(3.**0.5)])
-    A, B, B_, C = quant(A, B, B_, C, bit)
     if not rram:
+        A, B, B_, C = quant(A, B, B_, C, bit)
         return k, order, A, B, B_, C, mode
     else:
         rram = abc_to_rram(k,A,B,B_,C,bit)
@@ -179,8 +179,8 @@ def GL3(rram = True, bit = 0):
     B = np.array([5/18,4/9,5/18])
     B_ = np.array([-5/6,8/3,-5/6])
     C = np.array([1/2-1/10*(15**0.5), 1/2, 1/2+1/10*(15**0.5)])
-    A, B, B_, C = quant(A, B, B_, C, bit)
     if not rram:
+        A, B, B_, C = quant(A, B, B_, C, bit)
         return k, order, A, B, B_, C, mode
 
     else:

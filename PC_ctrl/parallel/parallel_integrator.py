@@ -93,7 +93,7 @@ class parallel_integrator:
                 if self.rram:
                     pre, _, _, _ = rram_integrator(self.func, self.c_method, self.x0+i*dx, Un[i], self.h_coarse, self.itr, self.rtol, self.atol).integrate(self.x0+(i+1)*dx)
                 else:
-                    pre, _, _, _ = integrator_coarse(self.func, self.c_method, self.x0+i*dx, Un[i], self.h_coarse, self.itr, self.rtol, self.atol).integrate(self.x0+(i+1)*dx)
+                    pre, _, _, _ = integrator(self.func, self.c_method, self.x0+i*dx, Un[i], self.h_coarse, self.itr, self.rtol, self.atol).integrate(self.x0+(i+1)*dx)
 
                 #Fine solution: Correction1
                 if self.rram:
