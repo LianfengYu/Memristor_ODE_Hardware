@@ -33,6 +33,7 @@ GL3 (MCS): mse = 2.29e-4
 im_Heun (software): mse = 1.22e-3
 
 Expected run time for demo on a "normal" desktop computer: ~2s
+```
 
 Note: When using the hardware model to simulate other applications, the model file parameters may need to be fine-tuned according to the specific application requirements.
 
