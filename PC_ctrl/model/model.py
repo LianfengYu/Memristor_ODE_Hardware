@@ -10,6 +10,8 @@ ber = 0
 gmax = 50
 gmin = 0
 
+random.seed(1)
+
 def model_map(rram, bit):
     if bit == 0:
         wmax = rram.max()
