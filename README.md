@@ -25,7 +25,9 @@ To run the example experiment, execute the following command:
 
 ```bash
 python ./PC_ctrl/exp.py
+```
 
+```text
 Example output:
 GL3 (MCS): mse = 2.29e-4
 im_Heun (software): mse = 1.22e-3
